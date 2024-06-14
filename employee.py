@@ -98,8 +98,7 @@ class Employee:
         lbl_merried_status=Label(upper_frame, font=("arial",12,"bold"), text="Married Status:", bg='white')
         lbl_merried_status.grid(row=2, column=2, sticky=W, padx=2, pady=7)
 
-        com_txt_merried=ttk.Combobox(upper_frame, state="readonly",
-                                                         font=("arial",12, "bold"), width=18)
+        com_txt_merried=ttk.Combobox(upper_frame, state="readonly", font=("arial",12, "bold"), width=18)
         com_txt_merried['value']=("Merried", "Unmerried")
         com_txt_merried.current(0)
         com_txt_merried.grid(row=2, column=3, sticky=W, padx=2, pady=7)
@@ -119,21 +118,19 @@ class Employee:
         txt_doj.grid(row=3, column=3, padx=2, pady=7)
 
         # Id Proof
-        com_txt_proof=ttk.Combobox(upper_frame, state="readonly",
-                                                         font=("arial",12, "bold"), width=18)
+        com_txt_proof=ttk.Combobox(upper_frame, state="readonly", font=("arial",12, "bold"), width=18)
         com_txt_proof['value']=("Select ID Proof", "PAN CARD", "ADHAR CARD", "DRIVING LICENCE")
         com_txt_proof.current(0)
-        com_txt_proof.grid(row=2, column=0, sticky=W, padx=2, pady=7)
+        com_txt_proof.grid(row=4, column=0, sticky=W, padx=2, pady=7)
 
         txt_proof=ttk.Entry(upper_frame, width=22, font=('arial',11,'bold'))
-        txt_proof.grid(row=4, column=1, padx=2, pady=7)
+        txt_proof.grid(row=4, column= 1, padx=2, pady=7)
 
         # gender
         lbl_gender=Label(upper_frame, font=("arial",12,"bold"), text="Gender:", bg='white')
         lbl_gender.grid(row=4, column=2, sticky=W, padx=2, pady=7)
 
-        com_txt_gender=ttk.Combobox(upper_frame, state="readonly",
-                                                         font=("arial",12, "bold"), width=18)
+        com_txt_gender=ttk.Combobox(upper_frame, state="readonly", font=("arial",12, "bold"), width=18)
         com_txt_gender['value']=("Male", "Female", "Other")
         com_txt_gender.current(0)
         com_txt_gender.grid(row=4, column=3, sticky=W, padx=2, pady=7)
@@ -160,16 +157,16 @@ class Employee:
         txt_ctc.grid(row=2, column=5, padx=2, pady=7)
 
         # mask image
-        img_mask=Image.open('college_images/pekerja.jpeg')
-        img_mask=img_mask.resize((220,220), Image.LANCZOS)
-        self.photomask=ImageTk.PhotoImage(img_mask)
+        # img_mask=Image.open('college_images/pekerja.jpeg')
+        # img_mask=img_mask.resize((220,220), Image.LANCZOS)
+        # self.photomask=ImageTk.PhotoImage(img_mask)
 
-        self.img_mask=Label(img_frame, image=self.photomask)
-        self.img_mask.place(x=1000, y=0, width=220, height=220)
+        # self.img_mask=Label(upper_frame, image=self.photomask)
+        # self.img_mask.place(x=1000, y=0, width=220, height=220)
 
         # Button Frame
         button_frame=Frame(upper_frame,bd=2,relief=RIDGE, bg='white')
-        button_frame.place(x=1290,y=10,width=170,height=210)
+        button_frame.place(x=1000,y=2,width=170,height=205)
 
         btn_add=Button(button_frame,text="Save",font=("arial",15, "bold"), width=13, bg='blue',fg='white')
         btn_add.grid(row=0, column= 0, padx=1, pady=5)
