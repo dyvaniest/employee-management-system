@@ -182,7 +182,90 @@ class Employee:
 
         # down Frame
         down_frame=LabelFrame(Main_frame,bd=2,relief=RIDGE, bg='white', text='Employee Information Table', font=('times new roman',11,'bold'), fg='black')
-        down_frame.place(x=10,y=250,width=1240,height=180)
+        down_frame.place(x=10,y=250,width=1240,height=185)
+
+        # Search Frame
+        search_frame=LabelFrame(down_frame,bd=2,relief=RIDGE, bg='white', text='Search Employee Information', font=('times new roman',11,'bold'), fg='black')
+        search_frame.place(x=5,y=0,width=1225,height=60)
+
+        search_by=Label(search_frame, font=("arial",11, "bold"), text="Search By:", fg="white", bg="red")
+        search_by.grid(row=0, column=0, sticky=W, padx=5)
+
+        # search
+        com_txt_search=ttk.Combobox(search_frame,state="readonly",
+        font=("arial", 12, "bold"), width=18)
+        com_txt_search['value']=("Select Option", "Phone", "id_proof")
+        com_txt_search.current(0)
+        com_txt_search.grid(row=0, column=1, sticky=W, padx=5)
+
+        txt_search=ttk.Entry(search_frame, width=22, font=("arial",11,"bold"))
+        txt_search.grid(row=0, column=2, padx=5)
+
+        btn_search=Button(search_frame,text="Search", font=("arial",11,"bold"), width=14, bg="blue", fg="white")
+        btn_search.grid(row=0, column=3, padx=5)
+
+        btn_ShowAll=Button(search_frame, text="Show All",font=("arial",11,"bold"), width=14, bg="blue", fg="white")
+        btn_ShowAll.grid(row=0, column=4, padx=5)
+
+        #stayhome=Label(search_frame, text="Wear a Mask", font=("times new roman", 30, "bold"), fg="red", bg="white")
+        #stayhome.place(x=780,y=0,width=600,height=30)
+
+        #img_logo_mask=Image.open(r'college_images\pekerja.pekerja.jpeg')
+        #img_logo_mask=img_logo_mask.resize((50,50), Image.LANCZOS)
+        #self.photoimg_logo_mask=ImageTk.PhotoImage(img_logo_mask)
+
+        #self.logo=Label(search_frame, image=self.photoimg_logo_mask)
+        #self.logo.place(x=900, y=0, width=50, height=50)
+
+        # =============== Employee Table ==============
+        # Table Frame
+        table_frame=Frame(down_frame,bd=3,relief=RIDGE)
+        table_frame.place(x=5,y=60,width=1225,height=100)
+
+        scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
+        scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
+
+        self.employee_table=ttk.Treeview(table_frame, columns=('dep', 'name', 'degi','email','address','married','dob','doj','idproofcomb','idproof','gender','phone','country','salary',),xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+        scroll_x.pack(side=BOTTOM, fill=X)
+        scroll_y.pack(side=RIGHT, fill=Y)
+
+        scroll_x.config(command=self.employee_table.xview)
+        scroll_y.config(command=self.employee_table.yview)
+
+        self.employee_table.heading('dep',text='Department')
+        self.employee_table.heading('name',text='Name')
+        self.employee_table.heading('degi',text='Designition')
+        self.employee_table.heading('email',text='Email')
+        self.employee_table.heading('address',text='Address')
+        self.employee_table.heading('married',text='Married Status')
+        self.employee_table.heading('dob',text='DOB')
+        self.employee_table.heading('doj',text='DOJ')
+        self.employee_table.heading('idproofcomb',text='ID Type')
+        self.employee_table.heading('idproof',text='ID Proof')
+        self.employee_table.heading('gender',text='Gender')
+        self.employee_table.heading('phone',text='Phone')
+        self.employee_table.heading('country',text='Country')
+        self.employee_table.heading('salary',text='Salary')
+
+        self.employee_table['show']='headings'
+
+        self.employee_table.column("dep", width=100)
+        self.employee_table.column("name", width=100)
+        self.employee_table.column("degi", width=100)
+        self.employee_table.column("email", width=100)
+        self.employee_table.column("address", width=100)
+        self.employee_table.column("married", width=100)
+        self.employee_table.column("dob", width=100)
+        self.employee_table.column("doj", width=100)
+        self.employee_table.column("idproofcomb", width=100)
+        self.employee_table.column("idproof", width=100)
+        self.employee_table.column("gender", width=100)
+        self.employee_table.column("phone", width=100)
+        self.employee_table.column("country", width=100)
+        self.employee_table.column("salary", width=100)
+
+        self.employee_table.pack(fill=BOTH, expand=1)
 
         # Label and Entry Fields
         self.var_dep=StringVar()
