@@ -95,13 +95,13 @@ class Employee:
         text_Designition.grid(row=2, column=1, sticky=W, padx=2, pady=7)
 
         # Married
-        lbl_merried_status=Label(upper_frame, font=("arial",12,"bold"), text="Married Status:", bg='white')
-        lbl_merried_status.grid(row=2, column=2, sticky=W, padx=2, pady=7)
+        lbl_married_status=Label(upper_frame, font=("arial",12,"bold"), text="Married Status:", bg='white')
+        lbl_married_status.grid(row=2, column=2, sticky=W, padx=2, pady=7)
 
-        com_txt_merried=ttk.Combobox(upper_frame, state="readonly", font=("arial",12, "bold"), width=18)
-        com_txt_merried['value']=("Merried", "Unmerried")
-        com_txt_merried.current(0)
-        com_txt_merried.grid(row=2, column=3, sticky=W, padx=2, pady=7)
+        com_txt_married=ttk.Combobox(upper_frame, state="readonly", font=("arial",12, "bold"), width=18)
+        com_txt_married['value']=("Married", "Unmarried")
+        com_txt_married.current(0)
+        com_txt_married.grid(row=2, column=3, sticky=W, padx=2, pady=7)
 
         # Dob
         lbl_dob=Label(upper_frame, font=("arial",12, "bold"), text="DOB:", bg="white")
@@ -166,10 +166,10 @@ class Employee:
 
         # Button Frame
         button_frame=Frame(upper_frame,bd=2,relief=RIDGE, bg='white')
-        button_frame.place(x=1000,y=2,width=170,height=205)
+        button_frame.place(x=1000,y=2,width=170,height=200)
 
         btn_add=Button(button_frame,text="Save",font=("arial",15, "bold"), width=13, bg='blue',fg='white')
-        btn_add.grid(row=0, column= 0, padx=1, pady=5)
+        btn_add.grid(row=0, column= 0, padx=1, pady=2)
 
         btn_update=Button(button_frame,text="Update",font=("arial",15, "bold"), width=13, bg='blue',fg='white')
         btn_update.grid(row=1, column= 0, padx=1, pady=5)
