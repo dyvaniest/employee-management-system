@@ -192,10 +192,10 @@ class Employee:
         btn_update=Button(button_frame,text="Update",command=self.update_data, font=("arial",15, "bold"), width=13, bg='blue',fg='white')
         btn_update.grid(row=1, column= 0, padx=1, pady=5)
 
-        btn_delete=Button(button_frame,text="Delete",font=("arial",15, "bold"), width=13, bg='blue',fg='white')
+        btn_delete=Button(button_frame,text="Delete",command=self.delete_data,font=("arial",15, "bold"), width=13, bg='blue',fg='white')
         btn_delete.grid(row=2, column= 0, padx=1, pady=5)
 
-        btn_clear=Button(button_frame,text="Clear",font=("arial",15, "bold"), width=13, bg='blue',fg='white')
+        btn_clear=Button(button_frame,text="Clear",command=self.reset_data, font=("arial",15, "bold"), width=13, bg='blue',fg='white')
         btn_clear.grid(row=3, column= 0, padx=1, pady=5)
 
         # down Frame
@@ -210,19 +210,21 @@ class Employee:
         search_by.grid(row=0, column=0, sticky=W, padx=5)
 
         # search
-        com_txt_search=ttk.Combobox(search_frame,state="readonly",
+        self.var_com_search=StringVar()
+        com_txt_search=ttk.Combobox(search_frame,textvariable=self.var_com_search,state="readonly",
         font=("arial", 12, "bold"), width=18)
         com_txt_search['value']=("Select Option", "Phone", "id_proof")
         com_txt_search.current(0)
         com_txt_search.grid(row=0, column=1, sticky=W, padx=5)
 
-        txt_search=ttk.Entry(search_frame, width=22, font=("arial",11,"bold"))
+        self.var_search=StringVar()
+        txt_search=ttk.Entry(search_frame, textvariable=self.var_search, width=22, font=("arial",11,"bold"))
         txt_search.grid(row=0, column=2, padx=5)
 
-        btn_search=Button(search_frame,text="Search", font=("arial",11,"bold"), width=14, bg="blue", fg="white")
+        btn_search=Button(search_frame,text="Search",command=self.search_data,font=("arial",11,"bold"), width=14, bg="blue", fg="white")
         btn_search.grid(row=0, column=3, padx=5)
 
-        btn_ShowAll=Button(search_frame, text="Show All",font=("arial",11,"bold"), width=14, bg="blue", fg="white")
+        btn_ShowAll=Button(search_frame, text="Show All",command=self.fetch_data,font=("arial",11,"bold"), width=14, bg="blue", fg="white")
         btn_ShowAll.grid(row=0, column=4, padx=5)
 
         #stayhome=Label(search_frame, text="Wear a Mask", font=("times new roman", 30, "bold"), fg="red", bg="white")
@@ -397,8 +399,67 @@ class Employee:
             except Exception as es:
                  messagebox.showerror('Error', f'Due To:{str(es)}', parent=self.root)
 
+    # Delete 
+    def delete_data(self):
+        if self.var_idproof.get()=="":
+            messagebox.showerror('Erro', "All fields are required")
+        else:
+            try:
+                Delete=messagebox.askyesno('Delete','Are you sure delete this employee', parent = self.root)
+                if Delete>0:
+                    conn=mysql.connector.connect(host='localhost', username='root', password='271203', database='mydata')
+                    my_cursor=conn.cursor()
+                    sql='delete from employee1 where id_proof=%s'
+                    value=(self.var_idproof.get(),)
+                    my_cursor.execute(sql,value)
+                else:
+                    if not Delete:
+                        return
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo('Delete', 'Employee successfully deleted', parent=self.root)
+            except Exception as es:
+                 messagebox.showerror('Error', f'Due To:{str(es)}', parent=self.root)
 
 
+
+        # Reset
+
+        def reset_data(self):
+            self.var_dep.set("Select Departement")
+            self.var_name.set("")
+            self.var_designition.set("")
+            self.var_email.set("")
+            self.var_address.set("")
+            self.var_married.set("Married")
+            self.var_dob.set("")
+            self.var_doj.set("")
+            self.var_idproofcomb.set("Select ID Proof")
+            self.var_idproof.set("")
+            self.var_gender.set("")
+            self.var_phone.set("")
+            self.var_country.set("")
+            self.var_salary.set("")
+        
+        # Search
+        def search_data(self):
+            if self.var_com_search.get()==''or self.var_search.get()=='':
+                messagebox.showerror('Error','Please select option')
+            else:
+                try:
+                    conn=mysql.connector.connect(host='localhost', username='root', password='271203', database='mydata')
+                    my_cursor=conn.cursor()
+                    my_cursor.execute('select * from employee1 where ' +str(self.var_com_search.get())+" LIKE '%"+str(self.var_search.get()+"%'"))
+                    rows=my_cursor.fetchall()
+                    if len(rows)!=0:
+                        self.employee_table.delete(*self.employee_table.get_childern())
+                        for i in rows:
+                            self.employee_table.insert("", END, value=i)
+                    conn.commit
+                    conn.close()
+                except Exception as es:
+                    messagebox.showerror('Error', f'Due To:{str(es)}', parent=self.root)
 
 
 
@@ -417,7 +478,3 @@ if __name__=="__main__":
     root = Tk()
     obj = Employee(root)
     root.mainloop()
-#   t e m p o r a r y   c h a n g e  
- #   t e m p o r a r y   c h a n g e  
- #   T e m p o r a r y   c h a n g e  
- 
