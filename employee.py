@@ -297,7 +297,7 @@ class Employee:
             messagebox.showerror('Error', 'All Fields are required')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost', username='root', password='271203', database='mydata')
+                conn=mysql.connector.connect(host='localhost', username='root', database='mydata')
                 my_cursor=conn.cursor()
                 my_cursor.execute('insert into employee1 values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (
 
@@ -326,7 +326,7 @@ class Employee:
     
     # fetch data
     def fetch_data(self):
-        conn=mysql.connector.connect(host='localhost', username='root', password='271203', database='mydata')
+        conn=mysql.connector.connect(host='localhost', username='root', database='mydata')
         my_cursor=conn.cursor()
         my_cursor.execute('select * from employee1')
         data=my_cursor.fetchall()
@@ -366,9 +366,9 @@ class Employee:
             try:
                 update=messagebox.askyesno('Update', 'Are you sure update this employee data')
                 if update>0:
-                    conn=mysql.connector.connect(host='localhost', username='root', password='271203', database='mydata')
+                    conn=mysql.connector.connect(host='localhost', username='root', database='mydata')
                     my_cursor=conn.cursor()
-                    my_cursor.execute('update employee1 set Department=%s, Name=%s, Desiginition=%s, Email=%s, Address=%s, Married_status=%s, DOB=%s, DOJ=%s, id_proof_type=%s, Gender=%s, Country=%s, Salary=%s where id_proof=%s',(
+                    my_cursor.execute('update employee1 set Department=%s, Name=%s, Designition=%s, Email=%s, Address=%s, Married_status=%s, DOB=%s, DOJ=%s, id_proof_type=%s, Gender=%s, Phone = %s, Country=%s, Salary=%s where id_proof=%s',(
 
                                                                                                                                                                                                                                     self.var_dep.get(),
                                                                                                                                                                                                                                     self.var_name.get(),
@@ -402,12 +402,12 @@ class Employee:
     # Delete 
     def delete_data(self):
         if self.var_idproof.get()=="":
-            messagebox.showerror('Erro', "All fields are required")
+            messagebox.showerror('Error', "All fields are required")
         else:
             try:
                 Delete=messagebox.askyesno('Delete','Are you sure delete this employee', parent = self.root)
                 if Delete>0:
-                    conn=mysql.connector.connect(host='localhost', username='root', password='271203', database='mydata')
+                    conn=mysql.connector.connect(host='localhost', username='root', database='mydata')
                     my_cursor=conn.cursor()
                     sql='delete from employee1 where id_proof=%s'
                     value=(self.var_idproof.get(),)
@@ -422,57 +422,47 @@ class Employee:
             except Exception as es:
                  messagebox.showerror('Error', f'Due To:{str(es)}', parent=self.root)
 
+    # Reset
 
-
-        # Reset
-
-        def reset_data(self):
-            self.var_dep.set("Select Departement")
-            self.var_name.set("")
-            self.var_designition.set("")
-            self.var_email.set("")
-            self.var_address.set("")
-            self.var_married.set("Married")
-            self.var_dob.set("")
-            self.var_doj.set("")
-            self.var_idproofcomb.set("Select ID Proof")
-            self.var_idproof.set("")
-            self.var_gender.set("")
-            self.var_phone.set("")
-            self.var_country.set("")
-            self.var_salary.set("")
+    def reset_data(self):
+        self.var_dep.set("Select Department")
+        self.var_name.set("")
+        self.var_designition.set("")
+        self.var_email.set("")
+        self.var_address.set("")
+        self.var_married.set("Married")
+        self.var_dob.set("")
+        self.var_doj.set("")
+        self.var_idproofcomb.set("Select ID Proof")
+        self.var_idproof.set("")
+        self.var_gender.set("")
+        self.var_phone.set("")
+        self.var_country.set("")
+        self.var_salary.set("")
+            
         
-        # Search
-        def search_data(self):
-            if self.var_com_search.get()==''or self.var_search.get()=='':
-                messagebox.showerror('Error','Please select option')
-            else:
-                try:
-                    conn=mysql.connector.connect(host='localhost', username='root', password='271203', database='mydata')
-                    my_cursor=conn.cursor()
-                    my_cursor.execute('select * from employee1 where ' +str(self.var_com_search.get())+" LIKE '%"+str(self.var_search.get()+"%'"))
-                    rows=my_cursor.fetchall()
-                    if len(rows)!=0:
-                        self.employee_table.delete(*self.employee_table.get_childern())
-                        for i in rows:
-                            self.employee_table.insert("", END, value=i)
-                    conn.commit
-                    conn.close()
-                except Exception as es:
-                    messagebox.showerror('Error', f'Due To:{str(es)}', parent=self.root)
-
-
-
-
-
-
-
+    # Search
+    def search_data(self):
+        if self.var_com_search.get()==''or self.var_search.get()=='':
+            messagebox.showerror('Error','Please select option')
+        else:
+            try:
+                conn=mysql.connector.connect(host='localhost', username='root', database='mydata')
+                my_cursor=conn.cursor()
+                my_cursor.execute('select * from employee1 where ' +str(self.var_com_search.get())+" LIKE '%"+str(self.var_search.get()+"%'"))
+                rows=my_cursor.fetchall()
+                if len(rows)!=0:
+                    self.employee_table.delete(*self.employee_table.get_children())
+                    for i in rows:
+                        self.employee_table.insert("", END, value=i)
+                conn.commit
+                conn.close()
+            except Exception as es:
+                messagebox.showerror('Error', f'Due To:{str(es)}', parent=self.root)
 
 
         # Label and Entry Fields
         self.var_dep=StringVar()
-
-
 
 if __name__=="__main__":
     root = Tk()
