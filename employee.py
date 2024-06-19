@@ -14,7 +14,7 @@ class Employee:
         # Variables
         self.var_dep=StringVar()
         self.var_name=StringVar()
-        self.var_designition=StringVar()
+        self.var_position=StringVar()
         self.var_email=StringVar()
         self.var_address=StringVar()
         self.var_married=StringVar()
@@ -24,7 +24,7 @@ class Employee:
         self.var_idproof=StringVar()
         self.var_gender=StringVar()
         self.var_phone=StringVar()
-        self.var_country=StringVar()
+        self.var_citizen=StringVar()
         self.var_salary=StringVar()
 
 
@@ -80,7 +80,7 @@ class Employee:
         lbl_dep.grid(row=0, column=0, padx=2, sticky=W)
 
         combo_dep=ttk.Combobox(upper_frame, textvariable=self.var_dep, font=('arial',11,'bold'), width=17, state='readonly')
-        combo_dep['values']=('Select Department', 'HR', 'Software Engineer', 'Manager')
+        combo_dep['values']=('Select Department', 'University', 'Faculty', 'Major')
         combo_dep.current(0)
         combo_dep.grid(row=0, column=1, padx=2, pady=10,sticky=W)
 
@@ -91,12 +91,12 @@ class Employee:
         text_name=ttk.Entry(upper_frame, textvariable=self.var_name, width=22, font=('arial',11,'bold'))
         text_name.grid(row=0, column=3, padx=2, pady=7)
 
-        #Designition
-        lbl_Designition=Label(upper_frame, font=('arial',12, 'bold'), text="Designition:", bg='white')
-        lbl_Designition.grid(row=1, column=0, padx=2, pady=7, sticky=W)
+        #Position
+        lbl_position=Label(upper_frame, font=('arial',12, 'bold'), text="Position:", bg='white')
+        lbl_position.grid(row=1, column=0, padx=2, pady=7, sticky=W)
 
-        text_Designition=ttk.Entry(upper_frame, textvariable=self.var_designition, width=22, font=('arial',11,'bold'))
-        text_Designition.grid(row=1, column=1, sticky=W, padx=2, pady=7)
+        text_position=ttk.Entry(upper_frame, textvariable=self.var_position, width=22, font=('arial',11,'bold'))
+        text_position.grid(row=1, column=1, sticky=W, padx=2, pady=7)
 
         #Email
         lbl_email=Label(upper_frame, font=('arial',12,'bold'), text="Email:", bg='white')
@@ -109,8 +109,8 @@ class Employee:
         lbl_address=Label(upper_frame, font=('arial',12, 'bold'), text="Address:", bg='white')
         lbl_address.grid(row=2, column=0, padx=2, pady=7, sticky=W)
 
-        text_Designition=ttk.Entry(upper_frame, textvariable=self.var_address, width=22, font=('arial',11,'bold'))
-        text_Designition.grid(row=2, column=1, sticky=W, padx=2, pady=7)
+        text_position=ttk.Entry(upper_frame, textvariable=self.var_address, width=22, font=('arial',11,'bold'))
+        text_position.grid(row=2, column=1, sticky=W, padx=2, pady=7)
 
         # Married
         lbl_married_status=Label(upper_frame, font=("arial",12,"bold"), text="Married Status:", bg='white')
@@ -137,7 +137,7 @@ class Employee:
 
         # Id Proof
         com_txt_proof=ttk.Combobox(upper_frame, textvariable=self.var_idproofcomb, state="readonly", font=("arial",12, "bold"), width=18)
-        com_txt_proof['value']=("Select ID Proof", "PAN CARD", "ADHAR CARD", "DRIVING LICENCE")
+        com_txt_proof['value']=("Select ID Proof", "NIP", "NIK", "SIM")
         com_txt_proof.current(0)
         com_txt_proof.grid(row=4, column=0, sticky=W, padx=2, pady=7)
 
@@ -149,7 +149,7 @@ class Employee:
         lbl_gender.grid(row=4, column=2, sticky=W, padx=2, pady=7)
 
         com_txt_gender=ttk.Combobox(upper_frame, textvariable=self.var_gender, state="readonly", font=("arial",12, "bold"), width=18)
-        com_txt_gender['value']=("Male", "Female", "Other")
+        com_txt_gender['value']=("Male", "Female")
         com_txt_gender.current(0)
         com_txt_gender.grid(row=4, column=3, sticky=W, padx=2, pady=7)
 
@@ -160,15 +160,17 @@ class Employee:
         txt_phone=ttk.Entry(upper_frame, textvariable=self.var_phone, width=22, font=('arial',11,'bold'))
         txt_phone.grid(row=0, column=5, padx=2, pady=7)
 
-        # country
-        lbl_country=Label(upper_frame, font=("arial",12, "bold"), text="Country:", bg="white")
-        lbl_country.grid(row=1, column=4, sticky=W, padx=2, pady=7)
+        # citizen
+        lbl_citizen=Label(upper_frame, font=("arial",12, "bold"), text="Citizen:", bg="white")
+        lbl_citizen.grid(row=1, column=4, sticky=W, padx=2, pady=7)
 
-        txt_country=ttk.Entry(upper_frame, textvariable=self.var_country, width=22, font=('arial',11,'bold'))
-        txt_country.grid(row=1, column=5, padx=2, pady=7)
+        com_txt_citizen=ttk.Combobox(upper_frame, textvariable=self.var_citizen, state="readonly", font=("arial",12, "bold"), width=18)
+        com_txt_citizen['value']=("WNI", "WNA")
+        com_txt_citizen.current(0)
+        com_txt_citizen.grid(row=1, column=5, sticky=W, padx=2, pady=7)
 
         # CTC
-        lbl_ctc=Label(upper_frame, font=("arial",12, "bold"), text="Salary(CTC):", bg="white")
+        lbl_ctc=Label(upper_frame, font=("arial",12, "bold"), text="Salary(IDR):", bg="white")
         lbl_ctc.grid(row=2, column=4, sticky=W, padx=2, pady=7)
 
         txt_ctc=ttk.Entry(upper_frame, textvariable=self.var_salary, width=22, font=('arial',11,'bold'))
@@ -200,7 +202,7 @@ class Employee:
 
         # down Frame
         down_frame=LabelFrame(Main_frame,bd=2,relief=RIDGE, bg='white', text='Employee Information Table', font=('times new roman',11,'bold'), fg='black')
-        down_frame.place(x=10,y=250,width=1240,height=185)
+        down_frame.place(x=10,y=250,width=1240,height=260)
 
         # Search Frame
         search_frame=LabelFrame(down_frame,bd=2,relief=RIDGE, bg='white', text='Search Employee Information', font=('times new roman',11,'bold'), fg='black')
@@ -213,7 +215,7 @@ class Employee:
         self.var_com_search=StringVar()
         com_txt_search=ttk.Combobox(search_frame,textvariable=self.var_com_search,state="readonly",
         font=("arial", 12, "bold"), width=18)
-        com_txt_search['value']=("Select Option", "Phone", "id_proof")
+        com_txt_search['value']=("Select Option", "Name", "Phone", "id_proof")
         com_txt_search.current(0)
         com_txt_search.grid(row=0, column=1, sticky=W, padx=5)
 
@@ -240,12 +242,12 @@ class Employee:
         # =============== Employee Table ==============
         # Table Frame
         table_frame=Frame(down_frame,bd=3,relief=RIDGE)
-        table_frame.place(x=5,y=60,width=1225,height=100)
+        table_frame.place(x=5,y=60,width=1225,height=170)
 
         scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
         scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
 
-        self.employee_table=ttk.Treeview(table_frame, columns=('dep', 'name', 'degi','email','address','married','dob','doj','idproofcomb','idproof','gender','phone','country','salary',),xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        self.employee_table=ttk.Treeview(table_frame, columns=('dep', 'name', 'posi','email','address','married','dob','doj','idproofcomb','idproof','gender','phone','citizen','salary',),xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
 
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
@@ -255,7 +257,7 @@ class Employee:
 
         self.employee_table.heading('dep',text='Department')
         self.employee_table.heading('name',text='Name')
-        self.employee_table.heading('degi',text='Designition')
+        self.employee_table.heading('posi',text='Position')
         self.employee_table.heading('email',text='Email')
         self.employee_table.heading('address',text='Address')
         self.employee_table.heading('married',text='Married Status')
@@ -265,14 +267,14 @@ class Employee:
         self.employee_table.heading('idproof',text='ID Proof')
         self.employee_table.heading('gender',text='Gender')
         self.employee_table.heading('phone',text='Phone')
-        self.employee_table.heading('country',text='Country')
+        self.employee_table.heading('citizen',text='Citizen')
         self.employee_table.heading('salary',text='Salary')
 
         self.employee_table['show']='headings'
 
         self.employee_table.column("dep", width=100)
         self.employee_table.column("name", width=100)
-        self.employee_table.column("degi", width=100)
+        self.employee_table.column("posi", width=100)
         self.employee_table.column("email", width=100)
         self.employee_table.column("address", width=100)
         self.employee_table.column("married", width=100)
@@ -282,7 +284,7 @@ class Employee:
         self.employee_table.column("idproof", width=100)
         self.employee_table.column("gender", width=100)
         self.employee_table.column("phone", width=100)
-        self.employee_table.column("country", width=100)
+        self.employee_table.column("citizen", width=100)
         self.employee_table.column("salary", width=100)
 
         self.employee_table.pack(fill=BOTH, expand=1)
@@ -303,7 +305,7 @@ class Employee:
 
                                                                                                                                 self.var_dep.get(),
                                                                                                                                 self.var_name.get(),
-                                                                                                                                self.var_designition.get(),
+                                                                                                                                self.var_position.get(),
                                                                                                                                 self.var_email.get(),
                                                                                                                                 self.var_address.get(),
                                                                                                                                 self.var_married.get(),
@@ -313,7 +315,7 @@ class Employee:
                                                                                                                                 self.var_idproof.get(),
                                                                                                                                 self.var_gender.get(),
                                                                                                                                 self.var_phone.get(),
-                                                                                                                                self.var_country.get(),
+                                                                                                                                self.var_citizen.get(),
                                                                                                                                 self.var_salary.get()
 
                                                                                                                             ))
@@ -346,7 +348,7 @@ class Employee:
 
         self.var_dep.set(data[0])
         self.var_name.set(data[1])
-        self.var_designition.set(data[2])
+        self.var_position.set(data[2])
         self.var_email.set(data[3])
         self.var_address.set(data[4])
         self.var_married.set(data[5])
@@ -356,7 +358,7 @@ class Employee:
         self.var_idproof.set(data[9])
         self.var_gender.set(data[10])
         self.var_phone.set(data[11])
-        self.var_country.set(data[12])
+        self.var_citizen.set(data[12])
         self.var_salary.set(data[13])
 
     def update_data(self):
@@ -368,11 +370,11 @@ class Employee:
                 if update>0:
                     conn=mysql.connector.connect(host='localhost', username='root', database='mydata')
                     my_cursor=conn.cursor()
-                    my_cursor.execute('update employee1 set Department=%s, Name=%s, Designition=%s, Email=%s, Address=%s, Married_status=%s, DOB=%s, DOJ=%s, id_proof_type=%s, Gender=%s, Phone = %s, Country=%s, Salary=%s where id_proof=%s',(
+                    my_cursor.execute('update employee1 set Department=%s, Name=%s, Position=%s, Email=%s, Address=%s, Married_status=%s, DOB=%s, DOJ=%s, id_proof_type=%s, Gender=%s, Phone = %s, Citizen=%s, Salary=%s where id_proof=%s',(
 
                                                                                                                                                                                                                                     self.var_dep.get(),
                                                                                                                                                                                                                                     self.var_name.get(),
-                                                                                                                                                                                                                                    self.var_designition.get(),
+                                                                                                                                                                                                                                    self.var_position.get(),
                                                                                                                                                                                                                                     self.var_email.get(),
                                                                                                                                                                                                                                     self.var_address.get(),
                                                                                                                                                                                                                                     self.var_married.get(),
@@ -382,7 +384,7 @@ class Employee:
                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                     self.var_gender.get(),
                                                                                                                                                                                                                                     self.var_phone.get(),
-                                                                                                                                                                                                                                    self.var_country.get(),
+                                                                                                                                                                                                                                    self.var_citizen.get(),
                                                                                                                                                                                                                                     self.var_salary.get(),
                                                                                                                                                                                                                                     self.var_idproof.get(),
                        
@@ -427,7 +429,7 @@ class Employee:
     def reset_data(self):
         self.var_dep.set("Select Department")
         self.var_name.set("")
-        self.var_designition.set("")
+        self.var_position.set("")
         self.var_email.set("")
         self.var_address.set("")
         self.var_married.set("Married")
@@ -437,7 +439,7 @@ class Employee:
         self.var_idproof.set("")
         self.var_gender.set("")
         self.var_phone.set("")
-        self.var_country.set("")
+        self.var_citizen.set("")
         self.var_salary.set("")
             
         
